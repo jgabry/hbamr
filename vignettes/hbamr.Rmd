@@ -363,15 +363,15 @@ kfold_hbam_multi <- hbam_cv(self, stimuli, group_id = self,
 The `hbam_cv()` function returns an object of classes `kfold` and `loo`, which can be further processed using the `loo` package. To compare the estimated ELPDs, we could run:
 
 ```{r, eval = FALSE}
-print(loo::loo_compare(list(BAM = kfold_bam, 
-                            HBAM = kfold_hbam, 
-                            HBAM_NF = kfold_hbam_nf, 
-                            HBAM_MULTI = kfold_hbam_multi)), simplify = FALSE)
+loo::loo_compare(list(BAM = kfold_bam, 
+                      HBAM = kfold_hbam, 
+                      HBAM_NF = kfold_hbam_nf, 
+                      HBAM_MULTI = kfold_hbam_multi))
 ```
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 library(loo)
-print(loo1, simplify = FALSE)
+print(loo1)
 ```
 
 We see that the unpooled BAM model is worse at predicting out-of-sample data than the other models, suggesting it overfits the data. The HBAM_NF model -- which does not allow for scale flipping -- also performs worse, suggesting it is too restrictive and underfits. The HBAM and HBAM_MULTI models outperform the other two models in this case. The HBAM_MULTI model -- with self-placements as `group_id` -- may have a slight edge, but the default HBAM model performs about equally well. 
